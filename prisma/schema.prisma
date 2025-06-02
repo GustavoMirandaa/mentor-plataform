@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model mentor {
+  id         Int      @id @default(autoincrement())
+  clerkId    String   @unique
+  name       String   @db.VarChar(150)
+  email      String?  @unique @db.VarChar(150)
+  address    String?  @db.VarChar(150)
+  phone      String?  @db.VarChar(150)
+  linkedin   String?  @db.VarChar(150)
+  ocuppation String?  @db.VarChar(150)
+  exp        String?  @db.VarChar(250)
+  bio        String?  @db.VarChar(250)
+  password   String?  @db.VarChar(255)
+  skill      String[] @db.VarChar(150)
+}
+
+model value {
+  mentor_value_id Int     @id @unique
+  hour_value      String? @db.VarChar(150)
+  days_a_week     String? @db.VarChar(150)
+}
