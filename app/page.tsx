@@ -1,6 +1,5 @@
-    "use client"
+    "use server"
 
-    import { useState } from "react"
     import { Button } from "@/components/ui/button"
     import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
     import { Badge } from "@/components/ui/badge"
@@ -10,32 +9,17 @@
     import {TopMentors} from "@/components/pageComponents/top-mentors";
     import {StatCard} from "@/components/pageComponents/stats-cards";
     import {NavBar} from "@/components/pageComponents/navbar";
+    import { PrismaClient } from "@/lib/generated/prisma"
+
+
+    const prisma = new PrismaClient()
 
 
 
-    const recentProjects = [
-      {
-        id: 1,
-        title: "Desenvolvimento App Mobile",
-        client: "TechCorp",
-        budget: "R$ 15.000",
-        mentors: 3,
-        status: "Em Andamento",
-      },
-      {
-        id: 2,
-        title: "Consultoria DevOps",
-        client: "StartupXYZ",
-        budget: "R$ 8.500",
-        mentors: 2,
-        status: "Aguardando Match",
-      },
-      { id: 3, title: "Treinamento React", client: "EduTech", budget: "R$ 12.000", mentors: 4, status: "Concluído" },
-    ]
+    export default async function Dashboard() {
 
+      const projects = await prisma.project.findMany()
 
-    export default function Dashboard() {
-      const [searchTerm, setSearchTerm] = useState("")
 
       return (
         <div className="min-h-screen bg-gray-50">
@@ -63,30 +47,19 @@
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {recentProjects.map((project) => (
+                      {projects.map((project) => (
                         <div
                           key={project.id}
                           className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
                         >
                           <div className="flex-1">
-                            <h3 className="font-medium text-gray-900">{project.title}</h3>
-                            <p className="text-sm text-gray-500">{project.client}</p>
+                            <h3 className="font-medium text-gray-900">{project.tittle}</h3>
+                            <p>{project.description}</p>
+                            <h3 className="text-xs font-medium text-gray-900">Categoria do projeto: {project.category}</h3>
                             <div className="flex items-center mt-2 space-x-4">
-                              <span className="text-sm font-medium text-green-600">{project.budget}</span>
-                              <span className="text-sm text-gray-500">{project.mentors} mentores</span>
+                              <span className="text-sm font-medium text-green-600">{project.budget?.toString()}</span>
                             </div>
                           </div>
-                          <Badge
-                            variant={
-                              project.status === "Concluído"
-                                ? "default"
-                                : project.status === "Em Andamento"
-                                  ? "secondary"
-                                  : "outline"
-                            }
-                          >
-                            {project.status}
-                          </Badge>
                         </div>
                       ))}
                     </div>

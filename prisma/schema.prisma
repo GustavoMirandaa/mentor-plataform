@@ -28,3 +28,17 @@ model value {
   hour_value      String? @db.VarChar(150)
   days_a_week     String? @db.VarChar(150)
 }
+
+model project {
+  tittle       String?  @db.VarChar(150)
+  description  String?  @db.VarChar(150)
+  category     String?  @db.VarChar(150)
+  duration     String?  @db.VarChar(150)
+  budget       Decimal? @db.Decimal
+  priority     String?  @db.VarChar(150)
+  skills       String[] @db.VarChar(150)
+  start_date   String?  @db.VarChar(150)
+  end_date     String?  @db.VarChar(150)
+  requirements String?  @db.VarChar(250)
+  id           Int      @id @unique @default(autoincrement())
+}

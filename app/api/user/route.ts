@@ -5,7 +5,6 @@ import {clerkClient} from "@clerk/clerk-sdk-node"
 const prisma = new PrismaClient()
 
 
-
 export async function POST(req: Request){
     const body = await req.json();
     const { name, email, phone , address, linkedin, password, ocuppation, exp, bio, skill, } = body
