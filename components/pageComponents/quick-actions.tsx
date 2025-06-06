@@ -10,7 +10,7 @@ export function QuickActions() {
             <div className="mt-8">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Ações Rápidas</CardTitle>
+                        <CardTitle className="text-blue-700">ações rápidas</CardTitle>
                         <CardDescription>Acesso rápido às funcionalidades principais</CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -21,7 +21,7 @@ export function QuickActions() {
                                     Gerenciar Mentores
                                 </Button>
                             </Link>
-                            <Link href="/projects/new">
+                            <Link href="/newproject">
                                 <Button variant="outline" className="w-full h-20 flex flex-col">
                                     <Briefcase className="w-6 h-6 mb-2"/>
                                     Criar Projeto

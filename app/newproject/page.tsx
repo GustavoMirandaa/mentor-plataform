@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui/progress"
 import { Switch } from "@/components/ui/switch"
 import { Clock, DollarSign, Send, X, Plus, UserPlus, Calculator, Target, Users } from "lucide-react"
 import {GetServerSideProps} from "next";
+import { NavBar } from "@/components/pageComponents/navbar"
 
 
 export interface Mentor {
@@ -201,12 +202,12 @@ export default function NovoProjetoPage() {
 
     return (
         <div className="min-h-screen bg-background">
-            <div className="border-b">
+            <div >
+                <NavBar></NavBar>
+
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center justify-between">
                         <div>
-                            <h1 className="text-2xl font-bold">Criar Novo Projeto</h1>
-                            <p className="text-muted-foreground">Defina os detalhes do projeto e convide mentores</p>
                         </div>
                         <Button variant="outline" onClick={() => window.history.back()}>
                             Cancelar
@@ -216,6 +217,7 @@ export default function NovoProjetoPage() {
             </div>
 
             <div className="container mx-auto px-4 py-8">
+
                 <div className="max-w-6xl mx-auto space-y-8">
                     {/* Detalhes do Projeto */}
                     <Card>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Search, Filter, Plus, Calendar, DollarSign, Users, Clock } from "lucide-react"
 import Link from "next/link"
+import {NavBar} from "@/components/pageComponents/navbar";
 
 const projects = [
   {
@@ -126,40 +127,11 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-gray-900">
-                MentorHub
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-500 hover:text-gray-900">
-                Dashboard
-              </Link>
-              <Link href="/mentors" className="text-gray-500 hover:text-gray-900">
-                Mentores
-              </Link>
-              <Link href="/projects" className="text-gray-900 font-medium">
-                Projetos
-              </Link>
-              <Link href="/onboarding" className="text-gray-500 hover:text-gray-900">
-                Onboarding
-              </Link>
-            </nav>
-            <Button>
-              <Plus className="w-4 h-4 mr-2" />
-              Novo Projeto
-            </Button>
-          </div>
-        </div>
-      </header>
-
+      <NavBar></NavBar>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Projetos</h1>
+          <h1 className="text-3xl font-bold text-blue-700">Projetos</h1>
           <p className="text-gray-600 mt-2">Gerencie contratos e faça o match com mentores</p>
         </div>
 
