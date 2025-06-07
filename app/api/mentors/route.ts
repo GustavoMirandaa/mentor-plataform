@@ -1,5 +1,5 @@
 'use server'
-import { PrismaClient } from "@/lib/generated/prisma"
+import { PrismaClient } from "../../../node_modules/@prisma/client"
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient()

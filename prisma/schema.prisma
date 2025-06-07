@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
 }
 
 datasource db {
@@ -8,25 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model mentor {
-  id         Int      @id @default(autoincrement())
-  clerkId    String   @unique
-  name       String   @db.VarChar(150)
-  email      String?  @unique @db.VarChar(150)
-  address    String?  @db.VarChar(150)
-  phone      String?  @db.VarChar(150)
-  linkedin   String?  @db.VarChar(150)
-  ocuppation String?  @db.VarChar(150)
-  exp        String?  @db.VarChar(250)
-  bio        String?  @db.VarChar(250)
-  password   String?  @db.VarChar(255)
-  skill      String[] @db.VarChar(150)
+model invite {
+  id               Int       @id @default(autoincrement())
+  projectid        Int
+  mentorid         Int
+  status           String?   @default("pending") @db.VarChar(20)
+  message          String?   @db.VarChar(500)
+  createdat        DateTime? @default(now()) @db.Timestamp(6)
+  updatedat        DateTime? @default(now()) @db.Timestamp(6)
+  response_message String?
+
+  @@unique([projectid, mentorid])
 }
 
-model value {
-  mentor_value_id Int     @id @unique
-  hour_value      String? @db.VarChar(150)
-  days_a_week     String? @db.VarChar(150)
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model mentor {
+  id                  Int      @id @default(autoincrement())
+  clerkId             String   @unique
+  name                String   @db.VarChar(150)
+  email               String?  @unique @db.VarChar(150)
+  address             String?  @db.VarChar(150)
+  phone               String?  @db.VarChar(150)
+  linkedin            String?  @db.VarChar(150)
+  ocuppation          String?  @db.VarChar(150)
+  exp                 String?  @db.VarChar(250)
+  bio                 String?  @db.VarChar(250)
+  password            String?  @db.VarChar(255)
+  skill               String[] @db.VarChar(150)
+  disponibility       String?  @db.VarChar(20)
+  weekly_availability String?  @db.VarChar(50)
+  hourly_rate         String?  @db.VarChar(50)
 }
 
 model project {
@@ -41,4 +51,12 @@ model project {
   end_date     String?  @db.VarChar(150)
   requirements String?  @db.VarChar(250)
   id           Int      @id @unique @default(autoincrement())
+  owner        Int?
+  mentorid     Int?
+}
+
+model value {
+  mentor_value_id Int     @id @unique
+  hour_value      String? @db.VarChar(150)
+  days_a_week     String? @db.VarChar(150)
 }

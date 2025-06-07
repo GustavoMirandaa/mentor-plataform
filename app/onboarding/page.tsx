@@ -64,8 +64,8 @@ export default function OnboardingPage() {
     skill: [] as string[],
 
     // Step 3 - Financial Info
-    hourlyRate: "",
-    availability: "",
+    hourly_rate: "",
+    weekly_availability: "",
     preferredProjects: "",
 
 
@@ -96,8 +96,8 @@ export default function OnboardingPage() {
         skill: [] as string[],
 
         // Step 3 - Financial Info
-        hourlyRate: "",
-        availability: "",
+        hourly_rate: "",
+        weekly_availability: "",
         preferredProjects: "",
 
 
@@ -349,8 +349,8 @@ export default function OnboardingPage() {
                       <Input
                         id="hourlyRate"
                         type="number"
-                        value={formData.hourlyRate}
-                        onChange={(e) => setFormData({ ...formData, hourlyRate: e.target.value })}
+                        value={formData.hourly_rate}
+                        onChange={(e) => setFormData({ ...formData, hourly_rate: e.target.value })}
                         placeholder="150"
                       />
                       <p className="text-sm text-gray-600 mt-1">Este será seu valor base por hora de trabalho</p>
@@ -359,8 +359,8 @@ export default function OnboardingPage() {
                     <div>
                       <Label htmlFor="availability">Disponibilidade Semanal</Label>
                       <Select
-                        value={formData.availability}
-                        onValueChange={(value) => setFormData({ ...formData, availability: value })}
+                        value={formData.weekly_availability}
+                        onValueChange={(value) => setFormData({ ...formData, weekly_availability: value })}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Selecione sua disponibilidade" />
@@ -414,7 +414,7 @@ export default function OnboardingPage() {
                       <div>
                         <span className="font-medium text-gray-700">Valor/Hora:</span>
                         <span className="ml-2 text-gray-600">
-                          {formData.hourlyRate ? `R$ ${formData.hourlyRate}` : "Não informado"}
+                          {formData.hourly_rate ? `R$ ${formData.hourly_rate}` : "Não informado"}
                         </span>
                       </div>
                       <div className="md:col-span-2">

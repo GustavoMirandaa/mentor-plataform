@@ -1,12 +1,12 @@
 
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import { Filter, MapPin, Search, } from "lucide-react";
+import {BadgeCheck, CircleDollarSign, DollarSign, Filter, MapPin, Search,} from "lucide-react";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import React from "react";
-import {PrismaClient} from "@/lib/generated/prisma";
+import {PrismaClient} from "../../../node_modules/@prisma/client";
 
 
 export async function MentorsDashboard() {
@@ -90,8 +90,12 @@ export async function MentorsDashboard() {
                                     {mentor.address}
                                 </div>
                                 <div>
-                                    <MapPin className="w-4 h-4 mr-1"/>
-                                    <p>Lmao!</p>
+                                    <CircleDollarSign className="w-4 h-4 mr-1"/>
+                                    {mentor.hourly_rate}
+                                </div>
+                                <div>
+                                    <BadgeCheck className="w-4 h-4 mr-1"/>
+                                    {mentor.weekly_availability}
                                 </div>
                             </div>
 
