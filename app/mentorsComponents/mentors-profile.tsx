@@ -1,4 +1,4 @@
-import {PrismaClient} from "@/prisma/generated/client"
+import {PrismaClient} from "@/prisma/client"
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
