@@ -6,7 +6,7 @@ import {Button} from "@/components/ui/button";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import React from "react";
-import {PrismaClient} from "../../../node_modules/@prisma/client";
+import {PrismaClient} from "@/prisma/generated/client"
 import Link from "next/link";
 
 

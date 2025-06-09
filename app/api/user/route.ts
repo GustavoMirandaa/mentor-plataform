@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "../../../node_modules/@prisma/client"
+import {PrismaClient} from "@/prisma/generated/client"
 import {clerkClient} from "@clerk/clerk-sdk-node"
 
 const prisma = new PrismaClient()

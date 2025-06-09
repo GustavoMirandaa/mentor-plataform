@@ -1,4 +1,4 @@
-import {PrismaClient} from "../../node_modules/@prisma/client"
+import {PrismaClient} from "@/prisma/generated/client"
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import { Filter } from "lucide-react"

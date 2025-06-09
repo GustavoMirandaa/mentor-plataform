@@ -1,6 +1,6 @@
 // app/api/projects/route.ts
 import { NextResponse } from "next/server"
-import { PrismaClient } from "../../../node_modules/@prisma/client"
+import {PrismaClient} from "@/prisma/generated/client"
 
 const prisma = new PrismaClient()
 
