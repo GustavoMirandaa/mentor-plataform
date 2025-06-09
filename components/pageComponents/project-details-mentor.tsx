@@ -217,7 +217,7 @@ export default function ProjectDetailsMentor({
                 <div className="text-center">
                     <AlertCircle className="w-8 h-8 mx-auto mb-4 text-red-600" />
                     <p className="text-red-600 mb-4">{error || "Projeto não encontrado"}</p>
-                    <Link href="/mentor/notifications">
+                    <Link href="/mentor/inviteResponses">
                         <Button>Voltar para Notificações</Button>
                     </Link>
                 </div>

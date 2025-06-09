@@ -1,47 +1,28 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/db"
 
-// Create invites table if it doesn't exist
-// You'll need to add this to your Prisma schema:
-/*
-model invite {
-  id         Int      @id @default(autoincrement())
-  projectId  Int
-  mentorId   Int
-  status     String   @default("pending") // pending, accepted, declined
-  message    String?  @db.VarChar(500)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@unique([projectId, mentorId])
-}
-*/
-
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
         const { projectId, mentorId, message } = body
 
         if (!projectId || !mentorId) {
-            return NextResponse.json({ error: "Project ID and Mentor ID are required" }, { status: 400 })
+            return NextResponse.json({ error: "O projectId e o mentorId são necessários." }, { status: 400 })
         }
 
-        // Check if invite already exists
         const existingInvite = await prisma.$queryRaw`
       SELECT * FROM invite WHERE projectId = ${projectId} AND mentorId = ${mentorId}
     `
 
         if (Array.isArray(existingInvite) && existingInvite.length > 0) {
-            return NextResponse.json({ error: "Invite already sent to this mentor" }, { status: 409 })
+            return NextResponse.json({ error: "Convite já enviado para este mentor." }, { status: 409 })
         }
 
-        // Create new invite
         const invite = await prisma.$executeRaw`
       INSERT INTO invite (projectId, mentorId, message, status, createdAt, updatedAt)
       VALUES (${projectId}, ${mentorId}, ${message || ""}, 'pending', NOW(), NOW())
     `
 
-        // Fetch mentor details for response
         const mentor = await prisma.mentor.findUnique({
             where: { id: mentorId },
             select: { name: true, email: true },

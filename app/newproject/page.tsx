@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import {useEffect, useState} from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,6 +14,7 @@ import { Switch } from "@/components/ui/switch"
 import { Clock, DollarSign, Send, X, Plus, UserPlus, Calculator, Target, Users } from "lucide-react"
 import {GetServerSideProps} from "next";
 import { NavBar } from "@/components/pageComponents/navbar"
+import {router} from "next/client";
 
 
 export interface Mentor {
@@ -72,6 +73,18 @@ export default function NovoProjetoPage() {
         requirements: "",
     })
 
+
+    useEffect(() => {
+        async function checkAdmin() {
+            const res = await fetch('/api/check-admin')
+            if (res.status === 403) {
+                await router.replace('/unauthorized')
+            } else if (res.status !== 200) {
+                // tratar outros erros ou logout
+            }
+        }
+        checkAdmin()
+    }, [])
 
 
 

@@ -7,6 +7,7 @@ import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import React from "react";
 import {PrismaClient} from "../../../node_modules/@prisma/client";
+import Link from "next/link";
 
 
 export async function MentorsDashboard() {
@@ -101,9 +102,11 @@ export async function MentorsDashboard() {
 
                             {/* Actions */}
                             <div className="flex space-x-2">
-                                <Button variant="outline" size="sm" className="flex-1">
-                                    Ver Perfil
-                                </Button>
+                                <Link href={`/mentores/${mentor.id}`}>
+                                    <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                                        Ver perfil
+                                    </Button>
+                                </Link>
                                 <Button size="sm" className="flex-1">
                                     Convidar
                                 </Button>

@@ -160,7 +160,7 @@ export default function MentorInviteDetail({ inviteId }: { inviteId: number }) {
                 <div className="text-center">
                     <AlertCircle className="w-8 h-8 mx-auto mb-4 text-red-600" />
                     <p className="text-red-600 mb-4">{error || "Convite não encontrado"}</p>
-                    <Link href="/mentor/notifications">
+                    <Link href="/inviteResponses">
                         <Button>Voltar para Notificações</Button>
                     </Link>
                 </div>
@@ -175,7 +175,7 @@ export default function MentorInviteDetail({ inviteId }: { inviteId: number }) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center space-x-4">
-                            <Link href="/mentor/notifications" className="flex items-center text-gray-600 hover:text-gray-900">
+                            <Link href="/inviteResponses" className="flex items-center text-gray-600 hover:text-gray-900">
                                 <ArrowLeft className="w-5 h-5 mr-2" />
                                 Voltar para Notificações
                             </Link>

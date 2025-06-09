@@ -15,7 +15,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { invite
             return NextResponse.json({ error: "Invalid status. Must be 'accepted' or 'declined'" }, { status: 400 })
         }
 
-        // Update invite status
+
         await prisma.$executeRaw`
       UPDATE invite 
       SET status = ${status}, 
@@ -24,7 +24,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { invite
       WHERE id = ${inviteId}
     `
 
-        // Fetch updated invite with project details
+
         const updatedInvite = await prisma.$queryRaw`
       SELECT 
         i.*,
@@ -55,7 +55,6 @@ export async function GET(request: NextRequest, { params }: { params: { inviteId
             return NextResponse.json({ error: "Invalid invite ID" }, { status: 400 })
         }
 
-        // Fetch invite with full project and mentor details
         const invite = await prisma.$queryRaw`
       SELECT 
         i.*,

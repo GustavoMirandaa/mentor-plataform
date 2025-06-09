@@ -37,6 +37,7 @@ model mentor {
   disponibility       String?  @db.VarChar(20)
   weekly_availability String?  @db.VarChar(50)
   hourly_rate         String?  @db.VarChar(50)
+  admin               Boolean? @default(false)
 }
 
 model project {

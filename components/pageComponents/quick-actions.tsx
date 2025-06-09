@@ -14,7 +14,7 @@ export function QuickActions() {
                         <CardDescription>Acesso rápido às funcionalidades principais</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Link href="/mentors">
                                 <Button variant="outline" className="w-full h-20 flex flex-col">
                                     <Users className="w-6 h-6 mb-2"/>
@@ -25,12 +25,6 @@ export function QuickActions() {
                                 <Button variant="outline" className="w-full h-20 flex flex-col">
                                     <Briefcase className="w-6 h-6 mb-2"/>
                                     Criar Projeto
-                                </Button>
-                            </Link>
-                            <Link href="/matching">
-                                <Button variant="outline" className="w-full h-20 flex flex-col">
-                                    <TrendingUp className="w-6 h-6 mb-2"/>
-                                    Sistema de Match
                                 </Button>
                             </Link>
                         </div>

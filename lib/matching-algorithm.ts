@@ -51,16 +51,13 @@ export function calculateMentorMatches(project: Project, mentors: Mentor[]): Men
 }
 
 function calculateMatch(project: Project, mentor: Mentor) {
-    // 1. Skills matching (60% weight)
+
     const skillsMatch = calculateSkillsMatch(project.skills, mentor.skill)
 
-    // 2. Experience matching (20% weight)
     const experienceMatch = calculateExperienceMatch(project.category, mentor.ocuppation, mentor.exp)
 
-    // 3. Budget matching (20% weight)
     const budgetMatch = calculateBudgetMatch(project.budget, mentor.hourly_rate, project.duration)
 
-    // Calculate weighted match percentage
     const matchPercentage = Math.round(
         skillsMatch.percentage * 0.6 + experienceMatch.score * 0.2 + budgetMatch.score * 0.2,
     )
@@ -101,9 +98,8 @@ function calculateExperienceMatch(
     mentorOccupation: string | null,
     mentorExp: string | null,
 ) {
-    let score = 50 // Base score
+    let score = 50
 
-    // Check occupation relevance
     if (projectCategory && mentorOccupation) {
         const categoryLower = projectCategory.toLowerCase()
         const occupationLower = mentorOccupation.toLowerCase()
@@ -119,7 +115,6 @@ function calculateExperienceMatch(
         }
     }
 
-    // Experience level bonus
     if (mentorExp) {
         if (mentorExp.includes("10+")) score += 20
         else if (mentorExp.includes("6-10")) score += 15
@@ -139,14 +134,13 @@ function calculateBudgetMatch(
     projectDuration: string | null,
 ) {
     if (!projectBudget || !mentorHourlyRate || !projectDuration) {
-        return { score: 50, matches: true } // Neutral if data missing
+        return { score: 50, matches: true }
     }
 
     const hourlyRate = Number.parseFloat(mentorHourlyRate)
     if (isNaN(hourlyRate)) return { score: 50, matches: true }
 
-    // Estimate project hours based on duration
-    let estimatedHours = 160 // Default 1 month = ~160 hours
+    let estimatedHours = 160
     if (projectDuration.includes("2")) estimatedHours = 320
     else if (projectDuration.includes("3")) estimatedHours = 480
     else if (projectDuration.includes("6")) estimatedHours = 960
@@ -156,14 +150,14 @@ function calculateBudgetMatch(
 
     let score = 50
     if (budgetRatio >= 1.2)
-        score = 100 // Budget is 20% higher than cost
+        score = 100
     else if (budgetRatio >= 1.0)
-        score = 90 // Budget matches cost
+        score = 90
     else if (budgetRatio >= 0.8)
-        score = 70 // Budget is 80% of cost
+        score = 70
     else if (budgetRatio >= 0.6)
-        score = 50 // Budget is 60% of cost
-    else score = 20 // Budget is too low
+        score = 50
+    else score = 20
 
     return {
         score,

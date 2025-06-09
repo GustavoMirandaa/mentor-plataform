@@ -1,18 +1,43 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useUser } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import MentorNotifications from "../mentorsComponents/mentor-notifications"
 import MentorInviteDetail from "../mentorsComponents/mentor-invite-detail"
 import ProjectDetailsMentor from "../../components/pageComponents/project-details-mentor"
+import { NavBar } from "@/components/pageComponents/navbar"
 
 export default function Page() {
+    const { user, isLoaded } = useUser()
+    const [mentorId, setMentorId] = useState<number | null>(null)
+    const [loadingMentor, setLoadingMentor] = useState(true)
     const [currentView, setCurrentView] = useState<"notifications" | "invite-detail" | "project-detail">("notifications")
     const [selectedInviteId, setSelectedInviteId] = useState<number | null>(null)
     const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null)
 
-    // In a real app, you'd get the mentorId from authentication/session
-    const mentorId = 6
+    useEffect(() => {
+        const fetchMentorId = async () => {
+            if (!user?.id) return
+
+            try {
+                const res = await fetch(`/api/mentors/by-user/${user.id}`)
+                const data = await res.json()
+
+                if (res.ok && data.mentorId) {
+                    setMentorId(data.mentorId)
+                } else {
+                    console.error("Erro ao buscar mentorId:", data?.error)
+                }
+            } catch (err) {
+                console.error("Erro na requisição do mentorId:", err)
+            } finally {
+                setLoadingMentor(false)
+            }
+        }
+
+        if (isLoaded) fetchMentorId()
+    }, [user, isLoaded])
 
     const showInviteDetail = (inviteId: number) => {
         setSelectedInviteId(inviteId)
@@ -30,34 +55,13 @@ export default function Page() {
         setSelectedProjectId(null)
     }
 
+    if (!isLoaded || loadingMentor) return <div>Carregando...</div>
+    if (!mentorId) return <div>Mentor não encontrado</div>
+
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Demo Navigation */}
-            <div className="bg-white border-b border-gray-200 p-4">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex items-center space-x-4">
-                        <Button variant={currentView === "notifications" ? "default" : "outline"} onClick={showNotifications}>
-                            Notificações
-                        </Button>
-                        <Button
-                            variant={currentView === "invite-detail" ? "default" : "outline"}
-                            onClick={() => showInviteDetail(1)}
-                            disabled={!selectedInviteId && currentView !== "invite-detail"}
-                        >
-                            Detalhes do Convite
-                        </Button>
-                        <Button
-                            variant={currentView === "project-detail" ? "default" : "outline"}
-                            onClick={() => showProjectDetail(1)}
-                            disabled={!selectedProjectId && currentView !== "project-detail"}
-                        >
-                            Detalhes do Projeto
-                        </Button>
-                    </div>
-                </div>
-            </div>
+           <NavBar></NavBar>
 
-            {/* Content */}
             {currentView === "notifications" && <MentorNotifications mentorId={mentorId} />}
             {currentView === "invite-detail" && selectedInviteId && <MentorInviteDetail inviteId={selectedInviteId} />}
             {currentView === "project-detail" && selectedProjectId && (

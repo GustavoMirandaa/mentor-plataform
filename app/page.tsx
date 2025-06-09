@@ -22,7 +22,7 @@ export default async function Dashboard() {
                     {/* Recent Projects */}
                     <RecentProjects></RecentProjects>
                     {/* Top Mentors */}
-                    <TopMentors></TopMentors>
+
                 </div>
                 {/* Quick Actions */}
                 <QuickActions></QuickActions>

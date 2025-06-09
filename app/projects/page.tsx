@@ -267,9 +267,11 @@ export default function ProjectsPage() {
                       </div>
                       <div className="flex space-x-2">
                         {project.status === "Aguardando Match" && (
-                            <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
-                              Fazer Match
-                            </Button>
+                            <Link href={`/mentorMatchIntegrated/${project.id}`}>
+                              <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                                Fazer Match
+                              </Button>
+                            </Link>
                         )}
                         <Button variant="outline" size="sm">
                           Ver Detalhes

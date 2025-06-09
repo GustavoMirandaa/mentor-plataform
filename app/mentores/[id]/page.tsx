@@ -19,6 +19,7 @@ import {
     Award,
 } from "lucide-react";
 import Link from "next/link";
+import { NavBar } from "@/components/pageComponents/navbar";
 
 const prisma = new PrismaClient();
 
@@ -68,12 +69,13 @@ export default async function MentorProfilePage({ params }: PageProps) {
     };
 
     return (
+
         <div className="min-h-screen bg-gray-50">
-            <header className="bg-white border-b border-gray-200">
+                <NavBar></NavBar>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center space-x-4">
-                            <Link href="/mentores" className="flex items-center text-gray-600 hover:text-gray-900">
+                            <Link href="/mentors" className="flex items-center text-gray-600 hover:text-gray-900">
                                 <ArrowLeft className="w-5 h-5 mr-2" />
                                 Voltar para Mentores
                             </Link>
@@ -90,7 +92,6 @@ export default async function MentorProfilePage({ params }: PageProps) {
                         </div>
                     </div>
                 </div>
-            </header>
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -126,16 +127,13 @@ export default async function MentorProfilePage({ params }: PageProps) {
 
                                     <div className="w-full space-y-3">
                                         <div className="flex items-center justify-between text-sm">
-                                            <span className="text-gray-600">Taxa de resposta</span>
-                                            <span className="font-medium">98%</span>
+
                                         </div>
                                         <div className="flex items-center justify-between text-sm">
-                                            <span className="text-gray-600">Projetos concluídos</span>
-                                            <span className="font-medium">45</span>
+
                                         </div>
                                         <div className="flex items-center justify-between text-sm">
-                                            <span className="text-gray-600">Tempo médio de resposta</span>
-                                            <span className="font-medium">2 horas</span>
+
                                         </div>
                                     </div>
                                 </div>
